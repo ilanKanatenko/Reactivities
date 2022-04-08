@@ -1,17 +1,20 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
+import LoadingComponent from '../../../../app/layout/LoadingComponent';
 import Activity from '../../../../app/models/activity';
 
 interface Props {
   activity: Activity | undefined;
   closeForm: () => void;
   createOrEditActivity: (activity: Activity) => void;
+  submitting: boolean;
 }
 
 function ActivitiesForm({
   activity: selectedActivity,
   closeForm,
   createOrEditActivity,
+  submitting,
 }: Props) {
   const initialState = selectedActivity ?? {
     id: '',
@@ -62,6 +65,7 @@ function ActivitiesForm({
         <Form.Input
           placeholder='Date'
           value={activity.date}
+          type='date'
           name='date'
           onChange={handleInputChange}
         />
@@ -77,7 +81,13 @@ function ActivitiesForm({
           name='venue'
           onChange={handleInputChange}
         />
-        <Button floated='right' positive type='submit' content='Submit' />
+        <Button
+          loading={submitting}
+          floated='right'
+          positive
+          type='submit'
+          content='Submit'
+        />
         <Button
           floated='right'
           type='button'
