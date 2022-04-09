@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './app/styles.css';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
+import { store, StoreContext } from './app/stores/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLDivElement
 );
-root.render(<App />);
+root.render(
+  <StoreContext.Provider value={store}>
+    <App />
+  </StoreContext.Provider>
+);
 
 // if (!rootElement) {
 //   throw new Error('Failed to find the root element');
